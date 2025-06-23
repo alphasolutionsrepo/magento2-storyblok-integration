@@ -1,5 +1,5 @@
 {
-    "name": "medialounge/magento2-storyblok-integration",
+    "name": "medialounge/magento2-storyblok-integration-contentapi",
     "description": "Magento 2 extension to integrate Storyblok visual editor",
     "type": "magento2-module",
     "version": "2.1.2",
@@ -39,8 +39,8 @@
     },
     "repositories": [
         {
-            "type": "composer",
-            "url": "https://repo.magento.com/"
+            "type": "vcs",
+            "url": "https://github.com/alphasolutionsrepo/magento2-storyblok-integration-contentapi.git"
         }
     ]
 }
