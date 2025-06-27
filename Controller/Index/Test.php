@@ -65,10 +65,19 @@ class Test extends Action
         $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$timeout: ' . $timeout);
 
         $storyblokClient = new StoryblokClient(
+            baseUri: 'https://api-us.storyblok.com/v2/cdn',
+            token: '8o0CRKHAtutaXvmQXVY17Qtt',
+            timeout: 10 // optional
+        );
+
+        /*
+        $storyblokClient = new StoryblokClient(
             baseUri: $apipath,
             token: $accesstoken,
             timeout: $timeout // optional
         );
+        */
+
 
         /** @var Page $resultPage */
         $resultPage = $this->pageFactory->create();

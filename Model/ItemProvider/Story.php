@@ -70,8 +70,18 @@ class Story implements ItemProviderInterface
         $storyblokClient = new StoryblokClient(
             baseUri: $apipath,
             token: $accesstoken,
-            timeout: $timeout 
+            timeout: $timeout // optional
         );
+        
+        /*
+        $this->storyblokClient = $storyblokClient->create([
+            'apiKey' => $scopeConfig->getValue(
+                'storyblok/general/api_key',
+                ScopeInterface::SCOPE_STORE,
+                $this->_storeManager->getStore()->getId()
+            )
+        ]);
+        */    
     }
 
     public function getItems($storeId)

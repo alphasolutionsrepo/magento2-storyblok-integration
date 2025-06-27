@@ -34,7 +34,7 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
 
         $this->viewFileSystem = $viewFileSystem;
 
-            $apipath = $this->scopeConfig->getValue(
+        $apipath = $this->scopeConfig->getValue(
             'storyblok/general/api_path',
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
