@@ -53,19 +53,17 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
         );
 
         $storyblokClient = new StoryblokClient(
+            baseUri: 'https://api-us.storyblok.com/v2/cdn',
+            token: '8o0CRKHAtutaXvmQXVY17Qtt',
+            timeout: 10 // optional
+        );
+
+        /*
+        $storyblokClient = new StoryblokClient(
             baseUri: $apipath,
             token: $accesstoken,
             timeout: $timeout // optional
         );
-        
-        /*
-        $this->storyblokClient = $storyblokClient->create([
-            'apiKey' => $scopeConfig->getValue(
-                'storyblok/general/api_key',
-                ScopeInterface::SCOPE_STORE,
-                $this->_storeManager->getStore()->getId()
-            )
-        ]);
         */
     }
 

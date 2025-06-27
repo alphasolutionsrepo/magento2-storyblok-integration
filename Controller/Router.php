@@ -76,12 +76,19 @@ class Router implements RouterInterface
             $this->storeManager->getStore()->getId()
         );
 
+       $storyblokClient = new StoryblokClient(
+            baseUri: 'https://api-us.storyblok.com/v2/cdn',
+            token: '8o0CRKHAtutaXvmQXVY17Qtt',
+            timeout: 10 // optional
+        );
+
+        /*
         $storyblokClient = new StoryblokClient(
             baseUri: $apipath,
             token: $accesstoken,
-            timeout: $timeout 
+            timeout: $timeout // optional
         );
-
+        */
         $this->cache = $cache;
         $this->serializer = $serializer;
     }
