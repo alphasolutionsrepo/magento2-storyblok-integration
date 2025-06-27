@@ -5,10 +5,10 @@ use Magento\Store\Model\ScopeInterface;
 
 class Script extends \Magento\Framework\View\Element\Template
 {
-    public function getApiKey(): ?string
+    public function getAccessToken(): ?string
     {
         return $this->_scopeConfig->getValue(
-            'storyblok/general/api_key',
+            'storyblok/general/access_token',
             ScopeInterface::SCOPE_STORE,
             $this->_storeManager->getStore()->getId()
         );
@@ -16,7 +16,7 @@ class Script extends \Magento\Framework\View\Element\Template
 
     protected function _toHtml(): ?string
     {
-        if ($this->getApiKey() && $this->getRequest()->getParam('_storyblok')) {
+        if ($this->getAccessToken() && $this->getRequest()->getParam('_storyblok')) {
             return parent::_toHtml();
         }
 
