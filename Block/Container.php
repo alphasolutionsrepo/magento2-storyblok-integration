@@ -9,6 +9,7 @@ use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Storyblok\Api\StoryblokClient;
+use Storyblok\Api\StoryblokClientInterface;
 
 class Container extends \Magento\Framework\View\Element\Template implements IdentityInterface
 {

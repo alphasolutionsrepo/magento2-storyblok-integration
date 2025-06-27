@@ -1,8 +1,8 @@
 <?php
 namespace MediaLounge\Storyblok\Controller;
 
-use Storyblok\ApiException;
 use Storyblok\Api\StoryblokClient;
+use Storyblok\Api\StoryblokClientInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\Action\Forward;
