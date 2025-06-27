@@ -8,6 +8,7 @@ use Magento\Sitemap\Model\SitemapItemInterfaceFactory;
 use Magento\Sitemap\Model\ItemProvider\ConfigReaderInterface;
 use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
 use Storyblok\Api\StoryblokClient;
+use Storyblok\Api\StoryblokClientInterface;
 
 class Story implements ItemProviderInterface
 {
@@ -40,7 +41,7 @@ class Story implements ItemProviderInterface
         ConfigReaderInterface $configReader,
         SitemapItemInterfaceFactory $itemFactory,
         ScopeConfigInterface $scopeConfig,
-        ClientFactory $storyblokClient,
+        StoryblokClientInterface $storyblokClient,
         StoreManagerInterface $storeManager
     ) {
         $this->itemFactory = $itemFactory;
