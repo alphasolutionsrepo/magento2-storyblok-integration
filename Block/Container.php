@@ -25,7 +25,7 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
 
     public function __construct(
         FileSystem $viewFileSystem,
-        StoryblokClientInterface $storyblokClient,
+        StoryblokClient $storyblokClient,
         ScopeConfigInterface $scopeConfig,
         Context $context,
         array $data = []

@@ -41,7 +41,7 @@ class Story implements ItemProviderInterface
         ConfigReaderInterface $configReader,
         SitemapItemInterfaceFactory $itemFactory,
         ScopeConfigInterface $scopeConfig,
-        StoryblokClientInterface $storyblokClient,
+        StoryblokClient $storyblokClient,
         StoreManagerInterface $storeManager
     ) {
         $this->itemFactory = $itemFactory;

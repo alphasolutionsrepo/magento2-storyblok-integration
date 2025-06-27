@@ -49,7 +49,7 @@ class Router implements RouterInterface
     public function __construct(
         ActionFactory $actionFactory,
         ScopeConfigInterface $scopeConfig,
-        StoryblokClientInterface $storyblokClient,
+        StoryblokClient $storyblokClient,
         CacheInterface $cache,
         SerializerInterface $serializer,
         StoreManagerInterface $storeManager
