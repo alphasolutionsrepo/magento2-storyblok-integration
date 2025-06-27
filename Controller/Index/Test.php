@@ -51,17 +51,23 @@ class Test extends Action
             $this->storeManager->getStore()->getId()
         );
 
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$apipath: ' . $apipath);
+
         $accesstoken = $this->scopeConfig->getValue(
             'storyblok/general/access_token',
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
         );
 
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$accesstoken: ' . $accesstoken);
+
         $timeout = $this->scopeConfig->getValue(
             'storyblok/general/timeout',
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
         );
+
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$timeout: ' . $timeout);
 
         $storyblokClient = new StoryblokClient(
             baseUri: $apipath,
