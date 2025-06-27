@@ -15,19 +15,12 @@
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="api_key" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>API Key</label>
-                    <validate>required-entry</validate>
+                <field id="api_path" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Path</label>
+                    <validate>required-entry</validate>                    
                     <depends>
                         <field id="storyblok/general/enabled">1</field>
-                    </depends>
-                </field>
-                <field id="webhook_secret" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Webhook Secret</label>
-                    <validate>required-entry validate-length minimum-length-20</validate>
-                    <depends>
-                        <field id="storyblok/general/enabled">1</field>
-                    </depends>
+                    </depends>                
                 </field>
                 <field id="access_token" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Access Token</label>
@@ -37,8 +30,15 @@
                     </depends>
                 </field>
                 <field id="timeout" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Timeout </label>
+                    <label>Timeout</label>
                     <validate>optional-entry</validate>
+                    <depends>
+                        <field id="storyblok/general/enabled">1</field>
+                    </depends>                    
+                </field>
+                <field id="webhook_secret" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Webhook Secret</label>
+                    <validate>required-entry validate-length minimum-length-20</validate>
                     <depends>
                         <field id="storyblok/general/enabled">1</field>
                     </depends>

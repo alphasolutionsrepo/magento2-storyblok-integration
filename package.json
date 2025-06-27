@@ -1,14 +1,14 @@
 {
     "name": "magento2-storyblok-integration",
-    "description": "Magento 2 extension to integrate Storyblok visual editor",
+    "description": "Magento 2 extension to integrate Storyblok visual editor (using the Storyblok Content API)",
     "private": true,
-    "version": "1.1.1",
+    "version": "2.2.0",
     "scripts": {
         "format": "prettier --ignore-unknown --write './**/*.{php,js}'"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Media-Lounge/magento2-storyblok-integration.git"
+        "url": "git+https://github.com/alphasolutionsrepo/magento2-storyblok-integration-contentapi.git"
     },
     "keywords": [
         "magento2",

@@ -31,7 +31,10 @@ class Story implements ItemProviderInterface
     /**
      * @var StoreManagerInterface
      */
-    private $storeManager;
+    /** @var ScopeConfigInterface */
+    protected ScopeConfigInterface $scopeConfig;
+    /** @var StoreManagerInterface */
+    protected StoreManagerInterface $storeManager;
 
     public function __construct(
         ConfigReaderInterface $configReader,
@@ -44,13 +47,30 @@ class Story implements ItemProviderInterface
         $this->configReader = $configReader;
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
-        $this->storyblokClient = $storyblokClient->create([
-            'apiKey' => $scopeConfig->getValue(
-                'storyblok/general/api_key',
-                ScopeInterface::SCOPE_STORE,
-                $this->storeManager->getStore()->getId()
-            )
-        ]);
+        
+        $apipath = $this->scopeConfig->getValue(
+            'storyblok/general/api_path',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $accesstoken = $this->scopeConfig->getValue(
+            'storyblok/general/access_token',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $timeout = $this->scopeConfig->getValue(
+            'storyblok/general/timeout',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $storyblokClient = new StoryblokClient(
+            baseUri: $apipath,
+            token: $accesstoken,
+            timeout: $timeout 
+        );
     }
 
     public function getItems($storeId)

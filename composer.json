@@ -1,13 +1,17 @@
 {
     "name": "medialounge/magento2-storyblok-integration-contentapi",
-    "description": "Magento 2 extension to integrate Storyblok visual editor",
+    "description": "Magento 2 extension to integrate Storyblok visual editor (using the Storyblok Content API)",
     "type": "magento2-module",
-    "version": "2.1.2",
+    "version": "2.2.0",
     "license": "GPL-3.0-only",
     "authors": [
         {
             "name": "Javier Villanueva",
             "email": "javier@medialounge.co.uk"
+        },
+        {
+            "name": "Roland Villemoes",
+            "email": "rv@alpha-solutions.us"
         }
     ],
     "keywords": [
@@ -25,7 +29,7 @@
         }
     },
     "require": {
-        "php": "^8.0.0",
+        "php": ">=8.3",
         "magento/framework": "^103.0",
         "magento/module-page-cache": "100.4.*",
         "magento/module-sitemap": "100.4.*",

@@ -52,6 +52,10 @@ class Clean extends Action implements HttpPostActionInterface
      * @var TypeListInterface
      */
     private $cacheTypeList;
+     /** @var ScopeConfigInterface */
+    protected ScopeConfigInterface $scopeConfig;
+    /** @var StoreManagerInterface */
+    protected StoreManagerInterface $storeManager;
 
     public function __construct(
         Context $context,
@@ -119,7 +123,7 @@ class Clean extends Action implements HttpPostActionInterface
      * Verify that the request is actually coming from Storyblok
      */
     private function isSignatureValid(RequestInterface $request): bool
-    {
+    {        
         $webhookSecret = $this->scopeConfig->getValue(
             'storyblok/general/webhook_secret',
             ScopeInterface::SCOPE_STORE,

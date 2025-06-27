@@ -46,6 +46,11 @@ class Router implements RouterInterface
      */
     private $storeManager;
 
+    /** @var ScopeConfigInterface */
+    protected ScopeConfigInterface $scopeConfig;
+    /** @var StoreManagerInterface */
+    protected StoreManagerInterface $storeManager;
+
     public function __construct(
         ActionFactory $actionFactory,
         ScopeConfigInterface $scopeConfig,
@@ -57,13 +62,31 @@ class Router implements RouterInterface
         $this->actionFactory = $actionFactory;
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
-        $this->storyblokClient = $storyblokClient->create([
-            'apiKey' => $this->scopeConfig->getValue(
-                'storyblok/general/api_key',
-                ScopeInterface::SCOPE_STORE,
-                $this->storeManager->getStore()->getId()
-            )
-        ]);
+
+        $apipath = $this->scopeConfig->getValue(
+            'storyblok/general/api_path',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $accesstoken = $this->scopeConfig->getValue(
+            'storyblok/general/access_token',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $timeout = $this->scopeConfig->getValue(
+            'storyblok/general/timeout',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $storyblokClient = new StoryblokClient(
+            baseUri: $apipath,
+            token: $accesstoken,
+            timeout: $timeout 
+        );
+
         $this->cache = $cache;
         $this->serializer = $serializer;
     }
