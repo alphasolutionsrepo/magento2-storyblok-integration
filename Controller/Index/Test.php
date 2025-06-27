@@ -39,11 +39,6 @@ class Test extends Action
     public function execute() {
 
         $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::execute called');
-        /** @var Page $resultPage */
-        $resultPage = $this->pageFactory->create();
-
-        // 'my.block.alias' must match the `name=` in your layout XML
-        $block = $resultPage->getLayout()->getBlock('MediaLounge.test.block');
 
         $apipath = $this->scopeConfig->getValue(
             'storyblok/general/api_path',
@@ -74,6 +69,13 @@ class Test extends Action
             token: $accesstoken,
             timeout: $timeout // optional
         );
+
+        /** @var Page $resultPage */
+        $resultPage = $this->pageFactory->create();
+
+        // 'my.block.alias' must match the `name=` in your layout XML
+        $block = $resultPage->getLayout()->getBlock('MediaLounge.test.block');
+
 
         $spacesApi = new SpacesApi($storyblokClient);
         $response = $spacesApi->me();
