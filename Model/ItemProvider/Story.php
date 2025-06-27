@@ -1,13 +1,13 @@
 <?php
 namespace MediaLounge\Storyblok\Model\ItemProvider;
 
-use Storyblok\ClientFactory;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Sitemap\Model\SitemapItemInterfaceFactory;
 use Magento\Sitemap\Model\ItemProvider\ConfigReaderInterface;
 use Magento\Sitemap\Model\ItemProvider\ItemProviderInterface;
+use Storyblok\Api\StoryblokClient;
 
 class Story implements ItemProviderInterface
 {
@@ -24,17 +24,17 @@ class Story implements ItemProviderInterface
     private $configReader;
 
     /**
-     * @var \Storyblok\Client
-     */
-    private $storyblokClient;
-
-    /**
      * @var StoreManagerInterface
      */
+    protected StoreManagerInterface $storeManager;
+    
     /** @var ScopeConfigInterface */
     protected ScopeConfigInterface $scopeConfig;
-    /** @var StoreManagerInterface */
-    protected StoreManagerInterface $storeManager;
+    
+    /**
+     * @var StoryblokClient
+     */
+    private $storyblokClient;
 
     public function __construct(
         ConfigReaderInterface $configReader,

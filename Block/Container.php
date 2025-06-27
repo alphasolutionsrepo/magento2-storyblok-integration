@@ -1,16 +1,14 @@
 <?php
 namespace MediaLounge\Storyblok\Block;
 
-use Storyblok\ApiException;
 use Magento\Framework\View\FileSystem;
 use Magento\Store\Model\ScopeInterface;
-use Storyblok\Client as StoryblokClient;
 use Magento\Framework\View\Element\AbstractBlock;
 use MediaLounge\Storyblok\Block\Container\Element;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Storyblok\ClientFactory as StoryblokClientFactory;
+use Storyblok\Api\StoryblokClient;
 
 class Container extends \Magento\Framework\View\Element\Template implements IdentityInterface
 {
@@ -26,7 +24,7 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
 
     public function __construct(
         FileSystem $viewFileSystem,
-        StoryblokClientFactory $storyblokClient,
+        StoryblokClientInterface $storyblokClient,
         ScopeConfigInterface $scopeConfig,
         Context $context,
         array $data = []
@@ -34,6 +32,32 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
         parent::__construct($context, $data);
 
         $this->viewFileSystem = $viewFileSystem;
+
+            $apipath = $this->scopeConfig->getValue(
+            'storyblok/general/api_path',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $accesstoken = $this->scopeConfig->getValue(
+            'storyblok/general/access_token',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $timeout = $this->scopeConfig->getValue(
+            'storyblok/general/timeout',
+            ScopeInterface::SCOPE_STORE,
+            $this->storeManager->getStore()->getId()
+        );
+
+        $storyblokClient = new StoryblokClient(
+            baseUri: $apipath,
+            token: $accesstoken,
+            timeout: $timeout // optional
+        );
+        
+        /*
         $this->storyblokClient = $storyblokClient->create([
             'apiKey' => $scopeConfig->getValue(
                 'storyblok/general/api_key',
@@ -41,6 +65,7 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
                 $this->_storeManager->getStore()->getId()
             )
         ]);
+        */
     }
 
     public function getCacheLifetime()

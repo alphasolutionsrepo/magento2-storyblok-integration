@@ -2,7 +2,7 @@
 namespace MediaLounge\Storyblok\Controller;
 
 use Storyblok\ApiException;
-use Storyblok\ClientFactory;
+use Storyblok\Api\StoryblokClient;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\Action\Forward;
@@ -46,15 +46,10 @@ class Router implements RouterInterface
      */
     private $storeManager;
 
-    /** @var ScopeConfigInterface */
-    protected ScopeConfigInterface $scopeConfig;
-    /** @var StoreManagerInterface */
-    protected StoreManagerInterface $storeManager;
-
     public function __construct(
         ActionFactory $actionFactory,
         ScopeConfigInterface $scopeConfig,
-        ClientFactory $storyblokClient,
+        StoryblokClientInterface $storyblokClient,
         CacheInterface $cache,
         SerializerInterface $serializer,
         StoreManagerInterface $storeManager

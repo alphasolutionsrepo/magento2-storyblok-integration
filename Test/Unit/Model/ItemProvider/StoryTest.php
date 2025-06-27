@@ -3,13 +3,11 @@ namespace MediaLounge\Storyblok\Test\Unit\Model\ItemProvider;
 
 use PHPUnit\Framework\TestCase;
 use Magento\Sitemap\Model\SitemapItem;
-use Storyblok\Client as StoryblokClient;
 use Magento\Store\Api\Data\StoreInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Sitemap\Model\SitemapItemInterfaceFactory;
-use Storyblok\ClientFactory as StoryblokClientFactory;
 use Magento\Sitemap\Model\ItemProvider\ConfigReaderInterface;
 use MediaLounge\Storyblok\Model\ItemProvider\Story as StoryItemResolver;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;

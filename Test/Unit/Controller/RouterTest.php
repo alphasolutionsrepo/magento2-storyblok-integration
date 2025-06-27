@@ -1,10 +1,8 @@
 <?php
 namespace MediaLounge\Storyblok\Test\Unit\Controller;
 
-use Storyblok\ApiException;
 use PHPUnit\Framework\TestCase;
 use Magento\Framework\App\ActionFactory;
-use Storyblok\Client as StoryblokClient;
 use Magento\Framework\App\Action\Forward;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\App\ActionInterface;
@@ -15,8 +13,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Storyblok\ClientFactory as StoryblokClientFactory;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
+use Storyblok\Api\StoryblokClient;
 
 class RouterTest extends TestCase
 {

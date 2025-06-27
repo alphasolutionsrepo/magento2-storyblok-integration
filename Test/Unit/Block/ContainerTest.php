@@ -1,12 +1,10 @@
 <?php
 namespace MediaLounge\Storyblok\Test\Unit\Block;
 
-use Storyblok\ApiException;
 use PHPUnit\Framework\TestCase;
 use Magento\Framework\App\State;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\FileSystem;
-use Storyblok\Client as StoryblokClient;
 use Magento\Store\Api\Data\StoreInterface;
 use MediaLounge\Storyblok\Block\Container;
 use Magento\Framework\View\LayoutInterface;
@@ -17,7 +15,6 @@ use Magento\Framework\App\Cache\StateInterface;
 use MediaLounge\Storyblok\Block\Container\Element;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Storyblok\ClientFactory as StoryblokClientFactory;
 use Magento\Framework\View\Element\Template\File\Resolver;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager as ObjectManagerHelper;
 

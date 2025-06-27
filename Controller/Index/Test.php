@@ -13,8 +13,10 @@ use Storyblok\Api\StoryblokClient;
 class Welcome extends Action
 {
     protected $pageFactory;
+    
     /** @var ScopeConfigInterface */
     protected ScopeConfigInterface $scopeConfig;
+
     /** @var StoreManagerInterface */
     protected StoreManagerInterface $storeManager;
 
@@ -55,13 +57,13 @@ class Welcome extends Action
             $this->storeManager->getStore()->getId()
         );
 
-        $client = new StoryblokClient(
+        $storyblokClient = new StoryblokClient(
             baseUri: $apipath,
             token: $accesstoken,
             timeout: $timeout // optional
         );
 
-        $spacesApi = new SpacesApi($client);
+        $spacesApi = new SpacesApi($storyblokClient);
         $response = $spacesApi->me();
         $block->setData('myValue', json_encode($response));
 
