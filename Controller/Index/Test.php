@@ -8,10 +8,13 @@ use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Storyblok\Api\SpacesApi;
 use Storyblok\Api\StoryblokClient;
+use Psr\Log\LoggerInterface;
 
 
-class Welcome extends Action
+class Test extends Action
 {
+    private LoggerInterface $logger;
+    
     protected $pageFactory;
     
     /** @var ScopeConfigInterface */
@@ -24,15 +27,18 @@ class Welcome extends Action
         \Magento\Framework\App\Action\Context $context,
         PageFactory $pageFactory,
         ScopeConfigInterface $scopeConfig,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        LoggerInterface $logger
     ){
         parent::__construct($context);
         $this->pageFactory = $pageFactory;
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
+        $this->logger = $logger;
     }
     public function execute() {
 
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::execute called');
         /** @var Page $resultPage */
         $resultPage = $this->pageFactory->create();
 
