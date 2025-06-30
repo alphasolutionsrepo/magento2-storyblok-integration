@@ -40,21 +40,21 @@ class Test extends Action
 
         $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::execute called');
 
-        $apipath = $this->scopeConfig->getValue(
+        $baseUri = $this->scopeConfig->getValue(
             'storyblok/general/api_path',
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
         );
 
-        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$apipath: ' . $apipath);
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$baseUri: ' . $baseUri);
 
-        $accesstoken = $this->scopeConfig->getValue(
+        $token = $this->scopeConfig->getValue(
             'storyblok/general/access_token',
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
         );
 
-        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$accesstoken: ' . $accesstoken);
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$token: ' . $token);
 
         $timeout = $this->scopeConfig->getValue(
             'storyblok/general/timeout',
@@ -62,21 +62,22 @@ class Test extends Action
             $this->storeManager->getStore()->getId()
         );
 
-        $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$timeout: ' . $timeout);
+       $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$timeout: ' . $timeout);
 
-        $storyblokClient = new StoryblokClient(
-            baseUri: 'https://api-us.storyblok.com/v2/cdn',
-            token: '8o0CRKHAtutaXvmQXVY17Qtt',
-            timeout: 10 // optional
+       /*
+       $storyblokClient = new StoryblokClient(
+            'https://api-us.storyblok.com/v2/cdn',            
+            '8o0CRKHAtutaXvmQXVY17Qtt',
+            10
         );
-
-        /*
+    */
+        
         $storyblokClient = new StoryblokClient(
-            baseUri: $apipath,
-            token: $accesstoken,
-            timeout: $timeout // optional
+            $baseUri,
+            $token,
+            $timeout
         );
-        */
+        
 
 
         /** @var Page $resultPage */
