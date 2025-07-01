@@ -12,11 +12,4 @@
             <argument name="configReader" xsi:type="object">MediaLounge\Storyblok\Model\ItemProvider\StoryConfigReader</argument>
         </arguments>
     </type>
-    <!-- type name="Storyblok\Api\StoryblokClient">
-        <arguments>
-            <argument name="baseUri" xsi:type="string">https://api-us.storyblok.com/v2/cdn</argument>
-            <argument name="token"   xsi:type="string">8o0CRKHAtutaXvmQXVY17Qtt</argument>
-            <argument name="timeout" xsi:type="number">10</argument>
-        </arguments>
-    </type -->
 </config>

@@ -22,9 +22,9 @@ class Router implements RouterInterface
     private $actionFactory;
 
     /**
-     * @var \Storyblok\Client
+     * @var StoryblokClient
      */
-    private $storyblokClient;
+    protected StoryblokClientInterface $storyblokClient;
 
     /**
      * @var ScopeConfigInterface
@@ -49,7 +49,6 @@ class Router implements RouterInterface
     public function __construct(
         ActionFactory $actionFactory,
         ScopeConfigInterface $scopeConfig,
-        StoryblokClient $storyblokClient,
         CacheInterface $cache,
         SerializerInterface $serializer,
         StoreManagerInterface $storeManager
@@ -58,13 +57,13 @@ class Router implements RouterInterface
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
 
-        $apipath = $this->scopeConfig->getValue(
+        $baseUri = $this->scopeConfig->getValue(
             'storyblok/general/api_path',
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
         );
 
-        $accesstoken = $this->scopeConfig->getValue(
+        $token = $this->scopeConfig->getValue(
             'storyblok/general/access_token',
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
@@ -75,20 +74,12 @@ class Router implements RouterInterface
             ScopeInterface::SCOPE_STORE,
             $this->storeManager->getStore()->getId()
         );
-
-       $storyblokClient = new StoryblokClient(
-            baseUri: 'https://api-us.storyblok.com/v2/cdn',
-            token: '8o0CRKHAtutaXvmQXVY17Qtt',
-            timeout: 10 // optional
-        );
-
-        /*
-        $storyblokClient = new StoryblokClient(
-            baseUri: $apipath,
-            token: $accesstoken,
-            timeout: $timeout // optional
-        );
-        */
+    
+        $this->storyblokClient = new StoryblokClient(
+            $baseUri,
+            $token,
+            $timeout
+        );    
         $this->cache = $cache;
         $this->serializer = $serializer;
     }
@@ -96,15 +87,27 @@ class Router implements RouterInterface
     public function match(RequestInterface $request): ?ActionInterface
     {
         $identifier = trim($request->getPathInfo(), '/');
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $identifier=' . $identifier);
 
         try {
             $data = $this->cache->load($identifier);
 
-            if (!$data || $request->getParam('_storyblok')) {
-                $response = $this->storyblokClient->getStoryBySlug($identifier);
-                $data = $this->serializer->serialize($response->getBody());
+            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $data=' . json_encode($data));
 
-                if (!$request->getParam('_storyblok') && !empty($response->getBody()['story'])) {
+            if (!$data || $request->getParam('_storyblok')) {
+                //$response = $this->storyblokClient->getStoryBySlug($identifier);
+                $storiesApi = new StoriesApi($this->storyblokClient);
+                $response = $storiesApi->bySlug($identifier);
+
+                if (empty($identifier)) {
+                    $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$identifier=EMPTY');
+                    return [];
+                }
+
+                $data = $this->serializer->serialize($response);
+
+                if (!$request->getParam('_storyblok') && !empty($response->story))
+                {
                     $this->cache->save($data, $identifier, [
                         "storyblok_{$response->getBody()['story']['id']}"
                     ]);
@@ -113,13 +116,13 @@ class Router implements RouterInterface
 
             $data = $this->serializer->unserialize($data);
 
-            if (!empty($data['story'])) {
+            if (!empty($data->story)) {
                 $request
                     ->setModuleName('storyblok')
                     ->setControllerName('index')
                     ->setActionName('index')
                     ->setParams([
-                        'story' => $data['story']
+                        'story' => data->story
                     ]);
 
                 return $this->actionFactory->create(Forward::class, ['request' => $request]);

@@ -63,14 +63,6 @@ class Test extends Action
         );
 
         $this->logger->debug('MediaLounge\Storyblok\Controller\Index\Test::$timeout: ' . $timeout);
-
- /*
-       $storyblokClient = new StoryblokClient(
-            'https://api-us.storyblok.com/v2/cdn',            
-            '8o0CRKHAtutaXvmQXVY17Qtt',
-            10
-        );
-    */
         
         $storyblokClient = new StoryblokClient(
             $baseUri,
