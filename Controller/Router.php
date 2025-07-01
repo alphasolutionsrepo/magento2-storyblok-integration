@@ -13,9 +13,12 @@ use Magento\Framework\App\RequestInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Psr\Log\LoggerInterface;
 
 class Router implements RouterInterface
 {
+    private LoggerInterface $logger;
+
     /**
      * @var ActionFactory
      */
@@ -51,11 +54,13 @@ class Router implements RouterInterface
         ScopeConfigInterface $scopeConfig,
         CacheInterface $cache,
         SerializerInterface $serializer,
-        StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager,
+        LoggerInterface $logger
     ) {
         $this->actionFactory = $actionFactory;
         $this->scopeConfig = $scopeConfig;
         $this->storeManager = $storeManager;
+        $this->logger = $logger;
 
         $baseUri = $this->scopeConfig->getValue(
             'storyblok/general/api_path',
