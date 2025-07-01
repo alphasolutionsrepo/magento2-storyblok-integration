@@ -34,7 +34,8 @@
         "magento/module-page-cache": "100.4.*",
         "magento/module-sitemap": "100.4.*",
         "storyblok/php-content-api-client": "^1.0",
-        "storyblok/richtext-resolver": "^1.0"
+        "storyblok/php-tiptap-extensions": "^1.0",
+        "storyblok/php-tiptap-extensions-blocks": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0.0",
