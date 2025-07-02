@@ -5,6 +5,7 @@ use Storyblok\Api\StoryblokClient;
 use Storyblok\Api\StoryblokClientInterface;
 use Storyblok\Api\StoriesApi;
 use Storyblok\Api\Domain\Value\Dto\Version;
+use Storyblok\Api\Request\StoriesRequest;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\Action\Forward;
@@ -16,6 +17,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Psr\Log\LoggerInterface;
+use Storyblok\Api\Exception\ApiException;
 
 class Router implements RouterInterface
 {
@@ -45,10 +47,10 @@ class Router implements RouterInterface
      * @var SerializerInterface
      */
     private $serializer;
-
     /**
-     * @var StoreManagerInteface
+     * @var StoreManagerInterface
      */
+    private $storeManager;
     private $storeManager;
 
     public function __construct(
@@ -103,7 +105,7 @@ class Router implements RouterInterface
 
             if (!$data || $request->getParam('_storyblok')) {
                 $storiesApi = new StoriesApi($this->storyblokClient, Version::Draft);
-                $response = $storiesApi->bySlug($identifier);
+                $response = $storiesApi->bySlug($identifier, new StoriesRequest(language: 'en'));
 
                 if (empty($identifier)) {
                     $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$identifier=EMPTY');
@@ -126,9 +128,9 @@ class Router implements RouterInterface
                 $request
                     ->setModuleName('storyblok')
                     ->setControllerName('index')
-                    ->setActionName('index')
                     ->setParams([
-                        'story' => data->story
+                        'story' => $data->story
+                    ]);
                     ]);
 
                 return $this->actionFactory->create(Forward::class, ['request' => $request]);
