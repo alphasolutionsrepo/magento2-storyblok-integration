@@ -112,11 +112,14 @@ class Router implements RouterInterface
                 }
 
                 $data = $this->serializer->serialize($response);
+                $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::serializer::$data=' . json_encode($data));
 
                 if (!$request->getParam('_storyblok') && !empty($response->story))
                 {
+                    $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::cache->save=' . "storyblok_{$response->story->id}");
+
                     $this->cache->save($data, $identifier, [
-                        "storyblok_{$response->getBody()['story']['id']}"
+                        "storyblok_{$response->story->id}"
                     ]);
                 }
             }
