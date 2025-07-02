@@ -131,8 +131,7 @@ class Router implements RouterInterface
                     ->setParams([
                         'story' => $data->story
                     ]);
-                    ]);
-
+                    
                 return $this->actionFactory->create(Forward::class, ['request' => $request]);
             }
         } catch (ApiException $e) {
