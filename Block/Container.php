@@ -13,7 +13,7 @@ use Storyblok\Api\StoryblokClient;
 use Storyblok\Api\StoryblokClientInterface;
 use Storyblok\Api\StoriesApi;
 use Storyblok\Api\Domain\Value\Dto\Version;
-use Storyblok\Api\Request\StoriesRequest;
+use Storyblok\Api\Request\StoryRequest;
 use Psr\Log\LoggerInterface;
 
 class Container extends \Magento\Framework\View\Element\Template implements IdentityInterface
@@ -119,7 +119,7 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
             try {
                 $storiesApi = new StoriesApi($this->storyblokClient, 'draft');
                 $this->logger->debug('MediaLounge\Storyblok\Blok\Container::getStory()::Start');
-                $data = $storiesApi->bySlug($slug, new StoriesRequest(language: 'en'));
+                $data = $storiesApi->bySlug($slug, new StoryRequest(language: 'en'));
                 $this->logger->debug('MediaLounge\Storyblok\Blok\Container::getStory()::$data' . json_encode($data));
                 $this->setData('story', $data->story);
             } catch (ApiException $e) {

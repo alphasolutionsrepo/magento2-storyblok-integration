@@ -5,7 +5,7 @@ use Storyblok\Api\StoryblokClient;
 use Storyblok\Api\StoryblokClientInterface;
 use Storyblok\Api\StoriesApi;
 use Storyblok\Api\Domain\Value\Dto\Version;
-use Storyblok\Api\Request\StoriesRequest;
+use Storyblok\Api\Request\StoryRequest;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\Action\Forward;
@@ -104,7 +104,7 @@ class Router implements RouterInterface
 
             if (!$data || $request->getParam('_storyblok')) {
                 $storiesApi = new StoriesApi($this->storyblokClient, 'draft');
-                $response = $storiesApi->bySlug($identifier, new StoriesRequest(language: 'en'));
+                $response = $storiesApi->bySlug($identifier, new StoryRequest(language: 'en'));
 
                 if (empty($identifier)) {
                     $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$identifier=EMPTY');
