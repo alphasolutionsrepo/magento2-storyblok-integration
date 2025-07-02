@@ -12,6 +12,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Storyblok\Api\StoryblokClient;
 use Storyblok\Api\StoryblokClientInterface;
 use Storyblok\Api\StoriesApi;
+use Storyblok\Api\Domain\Value\Dto\Version;
 use Psr\Log\LoggerInterface;
 
 class Container extends \Magento\Framework\View\Element\Template implements IdentityInterface

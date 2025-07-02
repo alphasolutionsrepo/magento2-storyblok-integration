@@ -4,6 +4,7 @@ namespace MediaLounge\Storyblok\Controller;
 use Storyblok\Api\StoryblokClient;
 use Storyblok\Api\StoryblokClientInterface;
 use Storyblok\Api\StoriesApi;
+use Storyblok\Api\Domain\Value\Dto\Version;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\Action\Forward;
