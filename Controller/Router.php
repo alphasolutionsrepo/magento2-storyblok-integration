@@ -51,7 +51,6 @@ class Router implements RouterInterface
      * @var StoreManagerInterface
      */
     private $storeManager;
-    private $storeManager;
 
     public function __construct(
         ActionFactory $actionFactory,
@@ -131,7 +130,7 @@ class Router implements RouterInterface
                     ->setParams([
                         'story' => $data->story
                     ]);
-                    
+
                 return $this->actionFactory->create(Forward::class, ['request' => $request]);
             }
         } catch (ApiException $e) {
