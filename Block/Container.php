@@ -117,7 +117,7 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
 
         if (!$this->getData('story')) {
             try {
-                $storiesApi = new StoriesApi($this->storyblokClient, Version::Draft);
+                $storiesApi = new StoriesApi($this->storyblokClient, 'draft');
                 $this->logger->debug('MediaLounge\Storyblok\Blok\Container::getStory()::Start');
                 $data = $storiesApi->bySlug($slug, new StoriesRequest(language: 'en'));
                 $this->logger->debug('MediaLounge\Storyblok\Blok\Container::getStory()::$data' . json_encode($data));

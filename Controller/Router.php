@@ -103,7 +103,7 @@ class Router implements RouterInterface
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $data=' . json_encode($data));
 
             if (!$data || $request->getParam('_storyblok')) {
-                $storiesApi = new StoriesApi($this->storyblokClient, Version::Draft);
+                $storiesApi = new StoriesApi($this->storyblokClient, 'draft');
                 $response = $storiesApi->bySlug($identifier, new StoriesRequest(language: 'en'));
 
                 if (empty($identifier)) {
