@@ -137,6 +137,7 @@ class Router implements RouterInterface
                 return $this->actionFactory->create(Forward::class, ['request' => $request]);
             }
         } catch (ApiException $e) {
+            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): ApiException $data=' . $e->getMessage() );
             return null;
         }
 
