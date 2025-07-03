@@ -126,6 +126,9 @@ class Router implements RouterInterface
 
             $data = $this->serializer->unserialize($data);
 
+            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::!empty($data->story)=' . !empty($data->story));
+
+
             if (!empty($data->story)) {
                 $request
                     ->setModuleName('storyblok')
@@ -133,6 +136,8 @@ class Router implements RouterInterface
                     ->setParams([
                         'story' => $data->story
                     ]);
+
+                $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::forward to: ' . "{$data->story}");
 
                 return $this->actionFactory->create(Forward::class, ['request' => $request]);
             }
