@@ -96,9 +96,8 @@ class Router implements RouterInterface
     {
         //$identifier = trim($request->getPathInfo(), '/');
         $paramStoryblok = $request->getParam('_storyblok');
-        $paramStory = $request->getParam('story');
-        $paramStoryEmpty = !empty($paramStory);
-        
+        $paramForwarded = $request->getParam('forwarded');
+                
         $originalPathInfo = trim($request->getOriginalPathInfo(), '/');
         $requestUri = trim($request->getRequestUri(), '/');
         $identifier = trim($request->getOriginalPathInfo(), '/');
@@ -106,10 +105,10 @@ class Router implements RouterInterface
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): getParam(_storyblok)=' . $paramStoryblok);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $originalPathInfo=' . $originalPathInfo);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $requestUri=' . $requestUri);
-        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $paramStory empty?' . $paramStoryEmpty);
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $paramForwarded=' . $paramForwarded);
 
-        if (!$paramStoryEmpty) {
-            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$paramStory not EMPTY Exit');
+        if ($paramForwarded) {
+            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::Forwarded Exit');
             return null;
         }
         
@@ -151,6 +150,7 @@ class Router implements RouterInterface
                     ->setControllerName('index')
                     ->setParams([
                         'story' => $data['story']
+                    , 'forwarded' => true
                     ]);
 
                 $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::forward to storyblok Controller');
