@@ -98,6 +98,7 @@ class Router implements RouterInterface
         $paramStoryblok = $request->getParam('_storyblok');
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $identifier=' . $identifier);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): getParam(_storyblok)=' . $paramStoryblok);
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $request=' . json_encode($request));
 
         try {
             $data = $this->cache->load($identifier);
