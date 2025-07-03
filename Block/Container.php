@@ -186,6 +186,7 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
     {
         $this->logger->debug('MediaLounge\Storyblok\Blok\Container::Start');
 
+        $request = $this->getRequest();
         $paramStoryblok = $request->getParam('_storyblok');
         $originalPathInfo = trim($request->getOriginalPathInfo(), '/');
         $requestUri = trim($request->getRequestUri(), '/');
