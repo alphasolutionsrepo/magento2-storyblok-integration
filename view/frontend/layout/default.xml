@@ -3,9 +3,9 @@
     <head>
         <script src="https://app.storyblok.com/f/storyblok-v2-latest.js" src_type="url"/>
     </head>
-    <body>
+    <!-- body>
         <referenceContainer name="before.body.end">
             <block class="MediaLounge\Storyblok\Block\Script" name="storyblok.config" template="MediaLounge_Storyblok::script.phtml" /> 
         </referenceContainer>
-    </body>
+    </body -->
 </page>
