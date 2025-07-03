@@ -139,8 +139,10 @@ class Router implements RouterInterface
         } catch (ApiException $e) {
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): ApiException $data=' . $e->getMessage() );
             return null;
+        } catch (\Throwable $e) {
+            $this->logger->error('MediaLounge\Storyblok\Controller\Router::match(): Unhandled Exception: ' . $e->getMessage());
+            return null;
         }
-
         return null;
     }
 }
