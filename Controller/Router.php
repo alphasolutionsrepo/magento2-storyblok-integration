@@ -146,7 +146,7 @@ class Router implements RouterInterface
                         'story' => $data['story']
                     ]);
 
-                $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::forward to page with: ' . "{$data['story']}");
+                $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::forward to storyblok Controller');
 
                 return $this->actionFactory->create(Forward::class, ['request' => $request]);
             }
