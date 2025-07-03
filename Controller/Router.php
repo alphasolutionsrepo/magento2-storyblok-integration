@@ -109,12 +109,12 @@ class Router implements RouterInterface
 
         if ($paramForwarded) {
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::Forwarded Exit');
-            return null;
+            return false;
         }
         
         if (empty($identifier)) {
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$identifier=EMPTY');
-            return null;
+            return false;
         }
 
         try {
