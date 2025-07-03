@@ -1,25 +1,29 @@
 <?php
 namespace MediaLounge\Storyblok\Block\Container;
 
-use Storyblok\RichtextRender\Resolver;
+//use Storyblok\RichtextRender\Resolver;
 use Magento\Framework\View\Element\Template\Context;
-use Storyblok\RichtextRender\ResolverFactory as StoryblokResolver;
+//use Storyblok\RichtextRender\ResolverFactory as StoryblokResolver;
+use Tiptap\Editor;
+use Storyblok\Tiptap\Extension\Storyblok;
+
 
 class Element extends \Magento\Framework\View\Element\Template
 {
     /**
-     * @var Resolver
+     * @var Editor
      */
-    private $storyblokResolver;
+    private $editor;
 
     public function __construct(
-        StoryblokResolver $storyblokResolver,
+        //StoryblokResolver $storyblokResolver,
         Context $context,
         array $data = []
     ) {
         parent::__construct($context, $data);
 
-        $this->storyblokResolver = $storyblokResolver->create();
+        //$this->storyblokResolver = $storyblokResolver->create();
+        $this->editor = new Editor(['extensions' => [new Storyblok(),],]);
     }
 
     protected function _toHtml(): string
@@ -31,7 +35,10 @@ class Element extends \Magento\Framework\View\Element\Template
 
     public function renderWysiwyg(array $arrContent): string
     {
-        return $this->storyblokResolver->render($arrContent);
+        $this->editor->setContent($arrContent);
+        $html = $this->editor->getHTML();
+
+        return $html;
     }
 
     public function transformImage(string $image, string $param = ''): string
