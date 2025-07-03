@@ -47,7 +47,7 @@ class Index extends Action implements HttpGetActionInterface
             ->getBlock('storyblok.page')
             ->setStory($story);
 
-        $this->logger->debug('MediaLounge\Storyblok\Controller\Index:: execute():: $resultPage=' . json_encode($resultPage));
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Index:: execute():: returning $resultPage');
 
         return $resultPage;
     }

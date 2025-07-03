@@ -108,7 +108,11 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
     private function getStory(): array
     {
 
-        $slug = $this->getData('slug') ?: $this->getRequest()->getParam('slug');
+        $slug = $this->getData('slug') ?: $this->getRequest()->getParam('slug') ?: $this->getRequest()->getOriginalPathInfo() ?: '';
+
+
+
+
         $this->logger->debug('MediaLounge\Storyblok\Blok\Container::getStory()::Start::slug=' . $slug);
         if (empty($slug)) {
             $this->logger->debug('MediaLounge\Storyblok\Blok\Container::getStory()::Start::slug=EMPTY');
