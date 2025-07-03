@@ -105,7 +105,7 @@ class Router implements RouterInterface
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): getParam(_storyblok)=' . $paramStoryblok);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $originalPathInfo=' . $originalPathInfo);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $requestUri=' . $requestUri);
-        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $paramStory=' . $paramStory);
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $paramStory empty?' . "{empty($paramStory)}");
 
         if (!empty($paramStory)) {
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$paramStory not EMPTY Exit');
