@@ -110,12 +110,12 @@ class Router implements RouterInterface
 
         if (!$paramStoryEmpty) {
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$paramStory not EMPTY Exit');
-            return [];
+            return null;
         }
         
         if (empty($identifier)) {
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$identifier=EMPTY');
-            return [];
+            return null;
         }
 
         try {
