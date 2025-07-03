@@ -96,10 +96,13 @@ class Router implements RouterInterface
     {
         $identifier = trim($request->getPathInfo(), '/');
         $paramStoryblok = $request->getParam('_storyblok');
+        $originalPathInfo = trim($request->getOriginalPathInfo(), '/');
+        $requestUri = trim($request->getRequestUri(), '/');
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $identifier=' . $identifier);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): getParam(_storyblok)=' . $paramStoryblok);
-        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $request=' . json_encode($request));
-
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $originalPathInfo=' . $originalPathInfo);
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $requestUri=' . $requestUri);
+        
         try {
             $data = $this->cache->load($identifier);
 
