@@ -185,6 +185,16 @@ class Container extends \Magento\Framework\View\Element\Template implements Iden
     protected function _toHtml(): string
     {
         $this->logger->debug('MediaLounge\Storyblok\Blok\Container::Start');
+
+        $paramStoryblok = $request->getParam('_storyblok');
+        $originalPathInfo = trim($request->getOriginalPathInfo(), '/');
+        $requestUri = trim($request->getRequestUri(), '/');
+        $identifier = trim($request->getOriginalPathInfo(), '/');
+        $this->logger->debug('MediaLounge\Storyblok\Blok\Container::_toHtml: $identifier=' . $identifier);
+        $this->logger->debug('MediaLounge\Storyblok\Blok\Container::_toHtml: getParam(_storyblok)=' . $paramStoryblok);
+        $this->logger->debug('MediaLounge\Storyblok\Blok\Container::_toHtml: $originalPathInfo=' . $originalPathInfo);
+        $this->logger->debug('MediaLounge\Storyblok\Blok\Container::_toHtml: $requestUri=' . $requestUri);
+
         $storyData = $this->getStory();
         $this->logger->debug('MediaLounge\Storyblok\Blok\Container::$storyData: ' . json_encode($storyData));
 
