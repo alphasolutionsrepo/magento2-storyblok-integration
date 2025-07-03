@@ -19,7 +19,7 @@
                 <item name="storyblokRouter" xsi:type="array">
                     <item name="class" xsi:type="string">MediaLounge\Storyblok\Controller\Router</item>
                     <item name="disable" xsi:type="boolean">false</item>
-                    <item name="sortOrder" xsi:type="string">36</item>
+                    <item name="sortOrder" xsi:type="string">35</item>
                 </item>
             </argument>
         </arguments>
