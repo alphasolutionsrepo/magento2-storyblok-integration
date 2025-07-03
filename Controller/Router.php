@@ -96,6 +96,8 @@ class Router implements RouterInterface
     {
         //$identifier = trim($request->getPathInfo(), '/');
         $paramStoryblok = $request->getParam('_storyblok');
+        $paramStory = $request->getParam('story');
+        
         $originalPathInfo = trim($request->getOriginalPathInfo(), '/');
         $requestUri = trim($request->getRequestUri(), '/');
         $identifier = trim($request->getOriginalPathInfo(), '/');
@@ -103,6 +105,12 @@ class Router implements RouterInterface
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): getParam(_storyblok)=' . $paramStoryblok);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $originalPathInfo=' . $originalPathInfo);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $requestUri=' . $requestUri);
+        $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $paramStory=' . $paramStory);
+
+        if (!empty($paramStory)) {
+            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$paramStory not EMPTY Exit');
+            return [];
+        }
         
         if (empty($identifier)) {
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$identifier=EMPTY');
