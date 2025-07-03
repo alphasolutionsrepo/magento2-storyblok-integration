@@ -135,15 +135,15 @@ class Router implements RouterInterface
             $data = $this->serializer->unserialize($data);
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::UNserialize::$data=' . json_encode($data));
 
-            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::$data->story=' . json_encode($data->story));
+            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::$data->story=' . json_encode($data['story']));
 
 
-            if (!empty($data->story)) {
+            if (!empty($data['story'])) {
                 $request
                     ->setModuleName('storyblok')
                     ->setControllerName('index')
                     ->setParams([
-                        'story' => $data->story
+                        'story' => $data['story']
                     ]);
 
                 $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::forward to: ' . "{$data->story}");
