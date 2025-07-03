@@ -94,10 +94,12 @@ class Router implements RouterInterface
 
     public function match(RequestInterface $request): ?ActionInterface
     {
-        $identifier = trim($request->getPathInfo(), '/');
+        //$identifier = trim($request->getPathInfo(), '/');
         $paramStoryblok = $request->getParam('_storyblok');
         $originalPathInfo = trim($request->getOriginalPathInfo(), '/');
         $requestUri = trim($request->getRequestUri(), '/');
+
+        $identifier = trim($request->getOriginalPathInfo(), '/');
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $identifier=' . $identifier);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): getParam(_storyblok)=' . $paramStoryblok);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $originalPathInfo=' . $originalPathInfo);
