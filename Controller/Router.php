@@ -58,7 +58,7 @@ class Router implements RouterInterface
         CacheInterface $cache,
         SerializerInterface $serializer,
         StoreManagerInterface $storeManager,
-        LoggerInterface $logger
+            LoggerInterface $logger
     ) {
         $this->actionFactory = $actionFactory;
         $this->scopeConfig = $scopeConfig;
@@ -98,33 +98,31 @@ class Router implements RouterInterface
         $paramStoryblok = $request->getParam('_storyblok');
         $originalPathInfo = trim($request->getOriginalPathInfo(), '/');
         $requestUri = trim($request->getRequestUri(), '/');
-
         $identifier = trim($request->getOriginalPathInfo(), '/');
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $identifier=' . $identifier);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): getParam(_storyblok)=' . $paramStoryblok);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $originalPathInfo=' . $originalPathInfo);
         $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $requestUri=' . $requestUri);
         
+        if (empty($identifier)) {
+            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$identifier=EMPTY');
+            return [];
+        }
+
         try {
             $data = $this->cache->load($identifier);
+            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): CACHED $data=' . json_encode($data));
 
-            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match(): $data=' . json_encode($data));
-
-            if (!$data || $request->getParam('_storyblok')) {
+            if (!$data || $paramStoryblok) {
                 $storiesApi = new StoriesApi($this->storyblokClient, 'draft');
                 $response = $storiesApi->bySlug($identifier, new StoryRequest(language: 'en'));
-
-                if (empty($identifier)) {
-                    $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::Start::$identifier=EMPTY');
-                    return [];
-                }
 
                 $data = $this->serializer->serialize($response);
                 $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::serializer::$data=' . json_encode($data));
 
-                if (!$request->getParam('_storyblok') && !empty($response->story))
+                if (!$paramStoryblok && !empty($response->story))
                 {
-                    $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::cache->save=' . "storyblok_{$response->story['id']}");
+                    $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::CACHE->save=' . "storyblok_{$response->story['id']}");
 
                     $this->cache->save($data, $identifier, [
                         "storyblok_{$response->story['id']}"
@@ -133,7 +131,7 @@ class Router implements RouterInterface
             }
 
             $data = $this->serializer->unserialize($data);
-            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::UNserialize::$data=' . json_encode($data));
+//            $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::UNserialize::$data=' . json_encode($data));
 
             $this->logger->debug('MediaLounge\Storyblok\Controller\Router::match()::$data->story=' . json_encode($data['story']));
 
